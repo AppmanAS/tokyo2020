@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <title>Tokyo Olympics QCPR Training</title>
   <meta name="description" content="Tokyo Olympics QCPR Training">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <meta name="theme-color" content="#5C6B80">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">  
@@ -13,21 +13,26 @@
 
 <body>
     <style>
-			html { height: 100%; }
+			html { 
+                height: 100%; 
+            }
+            @media screen and (max-height: 600px) {
+    			html { 
+                    font-size: small;
+                }
+            }
 			body {
 				color: white;
 				padding: 0;
-				margin: 0;
 				background-color: #5C6B80;
 				width: 100%;
 				height: 100%;
 				padding: 0px;
-				display: flex;
+				display: flex;                
 				align-items: center;
 				justify-content: center;
 				flex-direction: column;
                 font-family: Roboto,sans-serif;
-                font-size: 20px;;
                 font-weight: 300;
 			}
             h1 {
@@ -38,67 +43,77 @@
                 text-align: center;
             }
             input.go { 
-                margin-top: 24px;
-                padding: 6px 48px 6px 48px;
-                font-size: xx-large;                    
+                margin-top: 1rem;
+                font-size: 1.5rem;                    
                 background-color: #00A48B;
                 color: white;
                 border: none;
-                width: auto;            
+                width: auto;                            
+                border-radius: 1.5rem;
+                padding-left: 1rem;
+                padding-right: 1rem;
             }
             form {
                 text-align: center;
-                max-width: 80%;
+                max-width: 40rem;
             }
-            table.input td {
-                max-width: 40rem;                    
-                padding-top: 0.3rem;
-                padding-bottom: 1rem;
+            .row {
+                margin-top: 1rem;
+            }
+            .col.inpu {
+                text-align: right;
+            }
+            .col.label {
+                text-align: left;
             }
     </style>
     <form onsubmit="return submit()">
-        <h1>Tokyo Olympics QCPR training</h1>
-        <table class="input">
-            <tr>
-                <td align="left">Class ID nr.</td>
-                <td align="right">
-                    <input type="text" id="classId" disabled value="56892" class="form-control"/>
-                </td>
-            </tr>
-            <tr>
-                <td align="left">Manikin nr.</td>
-                <td align="right">
-                    <input type="text" id="manikinName" disabled value="Little Anne 6" class="form-control"/>
-                    <input type="text" id="manikinId" disabled style="display: none;" value="xyz123"/>
-                </td>
-            </tr>
-            <tr>
-                <td align="left" colspan="2">
-                    <p style="padding-top: 1rem; padding-bottom: 1rem;">
+      <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <h1>Tokyo Olympics QCPR training</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col label">Class ID nr.</div>
+            <div class="col input">
+                <input type="text" id="classId" disabled value="56892" class="form-control"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col label">Manikin nr.</div>
+            <div class="col input">
+                <input type="text" id="manikinName" disabled value="Little Anne 6" class="form-control"/>
+                <input type="text" id="manikinId" disabled style="display: none;" value="xyz123"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col label">
+                <p>
                     Please input your Volunteer ID nr in the field
                     and press the confirm button to register your
                     participation in this training session.
-                    </p>
-                </td>
-            </tr>
-            <tr>
-                <td align="left">Volunteer ID nr.</td>
-                <td align="right">
-                    <input type="number" id="volunteerId" autofocus class="form-control" placeholder="#######"/>
-                </td>
-            </tr>
-            <tr>
-                <td align="left">Confirm Volunteer ID nr.</td>
-                <td align="right">
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col label">Volunteer ID nr.</div>
+            <div class="col input">
+                <input type="number" id="volunteerId" autofocus class="form-control" placeholder="#######"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col label">Confirm Volunteer ID nr.</div>
+            <div class="col input">
                     <input type="number" id="confirmVolunteerId" class="form-control" placeholder="#######"/>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2" align="middle">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
                     <input type="submit" value="Confirm registration" class="go form-control btn btn-standard"/>
-                </td>
-            </tr>
-        </table>
+            </div>
+        </div>
+      </div>
     </form>
     <script>
         function submit() {
