@@ -99,13 +99,19 @@
         <div class="row">
             <div class="col label">Volunteer ID nr.</div>
             <div class="col input">
-                <input type="number" id="volunteerId" autofocus class="form-control" placeholder="#######"/>
+                <input
+                    type="number" id="volunteerId" autofocus 
+                    min="0" inputmode="numeric" pattern="[0-9]*"
+                    class="form-control" placeholder="#######"/>
             </div>
         </div>
         <div class="row">
             <div class="col label">Confirm Volunteer ID nr.</div>
             <div class="col input">
-                    <input type="number" id="confirmVolunteerId" class="form-control" placeholder="#######"/>
+                <input 
+                    type="number" id="confirmVolunteerId" 
+                    min="0" inputmode="numeric" pattern="[0-9]*"
+                    class="form-control" placeholder="#######"/>
             </div>
         </div>
         <div class="row">
