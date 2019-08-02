@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Tokyo Olympics QCPR Training</title>
+  <meta name="description" content="Tokyo Olympics QCPR Training">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="theme-color" content="#354458">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">  
+</head>
+
+<body>
+    <style>
+			html { height: 100%; }
+			body {
+				color: white;
+				padding: 0;
+				margin: 0;
+				background-color: #354458;
+				width: 100%;
+				height: 100%;
+				padding: 0px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				flex-direction: column;
+                font-family: Roboto,sans-serif;
+                font-size: 20px;;
+                font-weight: 300;
+			}
+            h1 {
+                font-weight: 300;
+            }
+            input { 
+                text-align: center;
+            }
+            input.go { 
+                margin-top: 24px;
+                padding: 6px 48px 6px 48px;
+                font-size: xx-large;                    
+                background-color: #00A48B;
+                color: white;
+                border: none;
+                width: auto;            
+            }
+            form {
+                text-align: center;
+                max-width: 80%;
+            }
+    </style>
+    <form onsubmit="return submit()">
+        <h1>Tokyo Olympics QCPR training</h1>
+        <table style="border-spacing: 0 1rem;">
+            <tr>
+                <td align="left">Class ID nr.</td>
+                <td align="right">
+                    <input type="text" id="classId" disabled value="56892" class="form-control"/>
+                </td>
+            </tr>
+            <tr>
+                <td align="left">Manikin nr.</td>
+                <td align="right">
+                    <input type="text" id="manikinName" disabled value="Little Anne 6" class="form-control"/>
+                    <input type="text" id="manikinId" disabled style="display: none;" value="xyz123"/>
+                </td>
+            </tr>
+            <tr>
+                <td align="left" colspan="2">
+                    Please input your Volunteer ID nr in the field
+                    and press the confirm button to register your
+                    participation in this training session.
+                </td>
+            </tr>
+            <tr>
+                <td align="left">Volunteer ID nr.</td>
+                <td align="right"><input type="text" id="volunteerId" autofocus class="form-control"/></td>
+            </tr>
+            <tr>
+                <td align="left">Confirm Volunteer ID nr.</td>
+                <td align="right"><input type="text" id="confirmVolunteerId" class="form-control"/></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="middle">
+                    <input type="submit" value="Confirm registration" class="go form-control"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <script>
+        function submit() {
+            var codeInput = document.getElementById('code');
+            var manikinInput = document.getElementById('manikin');
+
+            if (!codeInput.value) {
+                codeInput.focus();
+                alert('Please input classroom code!');
+                return false;
+            }            
+//            if (!manikinInput.value) {
+  //              manikinInput.focus();
+    //            alert('Please input manikin number!');
+      //          return false;
+        //    }
+            
+            // OK: Goto live feedback page
+             var baseUrl = 'https://eco-dev-aws.contentservice.net/prototype-heartsaver-learner/file/basicLogin.html?classroom=';
+            var url = baseUrl + codeInput.value.toLowerCase(); // + '-' + manikinInput.value;
+            window.location.replace(url);
+            return false;
+        }
+    </script>
+</body>
+
+</html>
