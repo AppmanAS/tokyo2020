@@ -7,7 +7,7 @@
   <meta name="description" content="Tokyo Olympics QCPR Training">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <meta name="theme-color" content="#354458">
+  <meta name="theme-color" content="#5C6B80">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">  
 </head>
 
@@ -18,7 +18,7 @@
 				color: white;
 				padding: 0;
 				margin: 0;
-				background-color: #354458;
+				background-color: #5C6B80;
 				width: 100%;
 				height: 100%;
 				padding: 0px;
@@ -32,6 +32,7 @@
 			}
             h1 {
                 font-weight: 300;
+                font-size: 3rem;
             }
             input { 
                 text-align: center;
@@ -49,10 +50,15 @@
                 text-align: center;
                 max-width: 80%;
             }
+            table.input td {
+                max-width: 40rem;                    
+                padding-top: 0.3rem;
+                padding-bottom: 1rem;
+            }
     </style>
     <form onsubmit="return submit()">
         <h1>Tokyo Olympics QCPR training</h1>
-        <table style="border-spacing: 0 1rem;">
+        <table class="input">
             <tr>
                 <td align="left">Class ID nr.</td>
                 <td align="right">
@@ -68,22 +74,28 @@
             </tr>
             <tr>
                 <td align="left" colspan="2">
+                    <p style="padding-top: 1rem; padding-bottom: 1rem;">
                     Please input your Volunteer ID nr in the field
                     and press the confirm button to register your
                     participation in this training session.
+                    </p>
                 </td>
             </tr>
             <tr>
                 <td align="left">Volunteer ID nr.</td>
-                <td align="right"><input type="text" id="volunteerId" autofocus class="form-control"/></td>
+                <td align="right">
+                    <input type="number" id="volunteerId" autofocus class="form-control" placeholder="#######"/>
+                </td>
             </tr>
             <tr>
                 <td align="left">Confirm Volunteer ID nr.</td>
-                <td align="right"><input type="text" id="confirmVolunteerId" class="form-control"/></td>
+                <td align="right">
+                    <input type="number" id="confirmVolunteerId" class="form-control" placeholder="#######"/>
+                </td>
             </tr>
             <tr>
                 <td colspan="2" align="middle">
-                    <input type="submit" value="Confirm registration" class="go form-control"/>
+                    <input type="submit" value="Confirm registration" class="go form-control btn btn-standard"/>
                 </td>
             </tr>
         </table>
