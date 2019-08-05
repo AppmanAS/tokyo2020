@@ -43,7 +43,6 @@
                 text-align: center;
             }
             input.go { 
-                margin-top: 1rem;
                 font-size: 1.5rem;                    
                 background-color: #00A48B;
                 color: white;
@@ -57,59 +56,106 @@
                 text-align: center;
                 max-width: 40rem;
             }
-            .row {
+            .col-sm-4 {
                 margin-top: 1rem;
-            }
-            .col.inpu {
-                text-align: right;
-            }
-            .col.label {
-                text-align: left;
-            }
+            }            
+.spinner {
+  width: 10%;
+  height: 10%;
+  background-color: #fff;
+
+  margin: 45% 0 0 45%;
+  -webkit-animation: sk-rotateplane 1.2s infinite ease-in-out;
+  animation: sk-rotateplane 2s infinite ease-in-out;
+}
+
+@-webkit-keyframes sk-rotateplane {
+  0% { -webkit-transform: perspective(120px) }
+  50% { -webkit-transform: perspective(120px) rotateY(180deg) }
+  100% { -webkit-transform: perspective(120px) rotateY(180deg)  rotateX(180deg) }
+}
+
+@keyframes sk-rotateplane {
+  0% { 
+    transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+    -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg) 
+  } 50% { 
+    transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+    -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg) 
+  } 100% { 
+    transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+    -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+  }
+}            
     </style>
-    <form onsubmit="return submit()">
+    <div id="spinnerContainer" style="width: 100%; height: 100%; position: absolute; background-color: #000; opacity: 0.6; visibility: hidden; z-index: 999">
+        <div class="spinner"></div>
+    </div>
+    <form onsubmit="return checkVolunteer()">
       <div class="container-fluid">
         <div class="row">
             <div class="col">
-                <h1>Tokyo Olympics QCPR training Colunteer Certification Site</h1>
+                <h1>Volunteer QCPR Status</h1>
             </div>
         </div>
         <div class="row">
-            <div class="col label">
-                <p>
-                    Type in Volunteer ID number:
-                </p>
+            <div class="col">
+                <h3 style="padding-top: 2rem; padding-bottom: 2rem;">Tokyo Olympics QCPR</h3>
             </div>
         </div>
-        <div class="row">
-            <div class="col input">
+        <div class="form-group row" style="align-items: center;">
+            <label for="volunteerId" class="col-sm-4 col-form-label">Volunteer ID:</label>
+            <div class="col-sm-4">
                 <input
                     type="tel" id="volunteerId" autofocus 
                     class="form-control" placeholder="#######"/>
-                <div class="col">
-                    <input type="submit" value="Check" class="go form-control btn btn-standard"/>
-                </div>
             </div>
-        </div>
+            <div class="col-sm-4">
+                <input type="submit" value="Check" class="form-control btn btn-light"/>
+            </div>
+        </div>        
+        <div class="row" id="resultDiv" style="align-items: center; visibility: hidden; margin-top: 2rem; height: 6rem;">
+            <div class="col">
+                <label id="result" style="font-size: 2rem; padding-right: 0.5rem;">123456789 is qualified</label>                    
+                <img class="img-fluid" src="passed.svg" id="passedImg" style="height: 3rem;"/>
+                <img class="img-fluid" src="not_passed.svg" id="notPassedImg" style="height: 3rem;"/>
+            </div>
+        </div>        
       </div>
     </form>
     <script>
-        function submit() {
-            debugger;
+        var passedImg = document.getElementById('passedImg');
+        var notPassedImg = document.getElementById('notPassedImg');
+        var resultLabel = document.getElementById('result');
+        var resultDiv = document.getElementById('resultDiv');
+        var body = document.getElementById('resultDiv');
+        var spinnerContainer = document.getElementById('spinnerContainer');
+
+        function checkVolunteer() {
+            // Hide old stuff
+            resultDiv.style.visibility = 'hidden';
+            spinnerContainer.style.visibility = 'visible';
+            document.body.style.backgroundColor = '#5C6B80';
+
             // First check we have a value
-            var volunteerId= document.getElementById('volunteerId');
+            var volunteerId = document.getElementById('volunteerId');
             if (!volunteerId.value) {
-                volunteerId.focus();
                 alert('Please input volunteer ID first!');
                 return false;
-            }            
+            }
             // TODO: Start some animation while waiting for result
             // Check if certified
             getCertificationStatus(volunteerId.value)
-                .then(function(status) {
-                    alert(status);
+                .then(function(certified) {
+                    resultLabel.innerText = volunteerId.value + ( certified ? ' is ' : ' is NOT ' ) + 'qualified';
+                    passedImg.style.display = certified ? 'inline' : 'none';
+                    notPassedImg.style.display = certified ? 'none' : 'inline';                    
+                    document.body.style.backgroundColor = certified ? '#018824' : '#8e0101';
+                    spinnerContainer.style.visibility = 'hidden';
+                    resultDiv.style.visibility = 'visible';
                 });
 
+            volunteerId.focus();
             // Make sure we dont leave the page:
             return false;
         }
